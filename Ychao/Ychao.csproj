@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard21;net5.0</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\AppDomain\Assembly\" />
+    <Folder Include="Common\Buffers\" />
+    <Folder Include="Common\Classes\" />
+    <Folder Include="Common\Configuration\Assemblies\" />
+    <Folder Include="Common\Reflection\" />
+    <Folder Include="Common\Threading\" />
+    <Folder Include="Common\IO\" />
+    <Folder Include="Common\Serialization\Helpers\NewtonsoftJson\" />
+    <Folder Include="Common\Serialization\Helpers\SystemTextJson\" />
+    <Folder Include="Common\Serialization\Override\" />
+    <Folder Include="Common\Text\" />
+    <Folder Include="Common\AppDomain\" />
+    <Folder Include="Common\Runtime\RuntimeBinder\" />
+  </ItemGroup>
+
+</Project>

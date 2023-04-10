@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="UevCustomActionTypesLib">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>e6be2026-a1f2-402c-94ec-dbecff70edc0</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ychao.Net.Tcp\Ychao.Network.csproj" />
+    <ProjectReference Include="..\Ychao.Unity\Ychao.Unity.csproj" />
+    <ProjectReference Include="..\Ychao\Ychao.csproj" />
+  </ItemGroup>
+
+</Project>

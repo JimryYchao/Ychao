@@ -71,6 +71,23 @@
 
         }
 
+        internal static string GetInvalidOperationResource(ExceptionInvalidOperationResource resource)
+        {
+            return resource switch
+            {
+                ExceptionInvalidOperationResource.Cannot_Remove_From_Stack_Or_Queue => "InvalidOperation_CannotRemoveFromStackOrQueue",
+                ExceptionInvalidOperationResource.Empty_Queue => "InvalidOperation_EmptyQueue",
+                ExceptionInvalidOperationResource.Enum_Op_CantHappen => "InvalidOperation_EnumOpCantHappen",
+                ExceptionInvalidOperationResource.Enum_Failed_Version => "InvalidOperation_EnumFailedVersion",
+                ExceptionInvalidOperationResource.Empty_Stack => "InvalidOperation_EmptyStack",
+                ExceptionInvalidOperationResource.Enum_Not_Started => "InvalidOperation_EnumNotStarted",
+                ExceptionInvalidOperationResource.Enum_Ended => "InvalidOperation_EnumEnded",
+                ExceptionInvalidOperationResource.No_Value => "InvalidOperation_NoValue",
+                ExceptionInvalidOperationResource.Reg_Remove_Sub_Key => "InvalidOperation_RegRemoveSubKey",
+                _ => default!
+            };
+        }
+
         internal static string GetArgumentResourceName(ExceptionArgumentResource resource)
         {
             return resource switch
@@ -90,7 +107,6 @@
                 _ => string.Empty
             };
         }
-
 
     }
 }

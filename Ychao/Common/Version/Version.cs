@@ -1,5 +1,5 @@
 ﻿using System;
-using Ychao.Common.Diagnostics.Debug;
+using Ychao.Diagnostics;
 
 namespace Ychao.Common
 {
@@ -12,7 +12,7 @@ namespace Ychao.Common
 
         public Version(int major, int minor, int build, int revision)
         {
-            Assert.Diagnostic(major < 0, ThrowHelper.ArgumentOutOfRange("major", ))
+            CodeDebug.Diagnostic(major < 0, ThrowHelper.ArgumentOutOfRangeException("major", ))
 
             _Major = major;
             _Minor = minor;

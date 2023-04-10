@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard21;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard21;net5.0;net6.0;net7.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -19,6 +19,7 @@
     <Folder Include="Common\Text\" />
     <Folder Include="Common\AppDomain\" />
     <Folder Include="Common\Runtime\RuntimeBinder\" />
+    <Folder Include="Common\Core\" />
   </ItemGroup>
 
 </Project>

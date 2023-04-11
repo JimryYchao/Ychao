@@ -11,11 +11,26 @@ namespace Ychao.Diagnostics
             FlashFrequency = 10;
         }
 
-        public void WriteLine(string message)
+        public void WriteLine(string message, int indentLevel = 0)
         {
             if (string.IsNullOrEmpty(message))
                 return;
+
+            var count = indentLevel;
+
+            while (count > 0)
+            {
+                count--;
+                Debug.Indent();
+            }
             Debug.WriteLine(message);
+            count = indentLevel;
+            while (count > 0)
+            {
+                count--;
+                Debug.Unindent();
+            }
+
             if (FlashFrequency < 2)
                 Debug.Flush();
             else
@@ -32,16 +47,12 @@ namespace Ychao.Diagnostics
         public void Fail(string message, string detail)
         {
             if (!string.IsNullOrEmpty(message))
-            {
                 WriteLine(message);
-            }
 
             if (!string.IsNullOrEmpty(detail))
             {
                 WriteLine("——————    FAIL DETAIL    ——————");
-                Debug.Indent();
-                WriteLine(detail);
-                Debug.Unindent();
+                WriteLine(detail, 1);
             }
         }
 

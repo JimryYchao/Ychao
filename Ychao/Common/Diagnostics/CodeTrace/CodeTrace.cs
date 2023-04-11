@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ychao.Diagnostics
+namespace Ychao.Common.Diagnostics.CodeTrace
 {
     public sealed class CodeTrace
     {

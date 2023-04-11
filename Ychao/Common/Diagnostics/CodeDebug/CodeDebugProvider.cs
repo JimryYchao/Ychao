@@ -8,6 +8,9 @@ namespace Ychao.Diagnostics
     {
         private int ThreadID = -1;
 
+        
+
+
         public CodeDebugProvider(int ThreadID)
         {
             this.ThreadID = ThreadID;
@@ -65,6 +68,20 @@ namespace Ychao.Diagnostics
 
         #region OUTPUT
         public bool CanOutputTxt { get; set; }
+
+        class TextWriter : Ychao.Diagnostics.TextWriter
+        {
+            public static 
+
+
+
+
+        }
+
+
+
+
+
 
         #endregion
     }

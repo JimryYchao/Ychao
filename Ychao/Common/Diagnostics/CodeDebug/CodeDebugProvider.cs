@@ -1,70 +1,71 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Threading;
 
 namespace Ychao.Diagnostics
 {
     internal class CodeDebugProvider : IDebugProvider
     {
-        public CodeDebugProvider()
+        private int ThreadID = -1;
+
+        public CodeDebugProvider(int ThreadID)
         {
-            FlashFrequency = 10;
+            this.ThreadID = ThreadID;
         }
 
-        public void WriteLine(string message, int indentLevel = 0)
+        #region DEBUG
+        void __WriteLine(string message)
         {
             if (string.IsNullOrEmpty(message))
                 return;
 
-            var count = indentLevel;
-
-            while (count > 0)
-            {
-                count--;
-                Debug.Indent();
-            }
             Debug.WriteLine(message);
-            count = indentLevel;
-            while (count > 0)
-            {
-                count--;
-                Debug.Unindent();
-            }
-
-            if (FlashFrequency < 2)
-                Debug.Flush();
-            else
-            {
-                Interlocked.Exchange(ref s_counter, s_counter++);
-                if (s_counter >= FlashFrequency)
-                {
-                    Debug.Flush();
-                    Interlocked.Exchange(ref s_counter, 0);
-                }
-            }
         }
 
-        public void Fail(string message, string detail)
+        public void WriteLine(string message)
+        {
+            __WriteLine((message[0] != '#' ? "|| " : "|") + message);
+        }
+
+        public void Fail(string message)
         {
             if (!string.IsNullOrEmpty(message))
-                WriteLine(message);
-
-            if (!string.IsNullOrEmpty(detail))
             {
-                WriteLine("——————    FAIL DETAIL    ——————");
-                WriteLine(detail, 1);
+                WriteLine("# ---------------- ASSERT FAILED ----------------");
+                WriteLine(message);
             }
         }
 
-        private volatile int s_counter = 0;
-
-        /// <summary>
-        /// 小于 2 表示每次写入都将调用一次 Debug.Flush(), 默认值为 10
-        /// </summary>
-        public int FlashFrequency
+        public void PrintStackTraceDetail(int frame, bool outputThreadId = false)
         {
-            get;
-            set;
+            string stack;
+            try
+            {
+                stack = new StackTrace(frame).ToString();
+            }
+            catch
+            {
+                stack = string.Empty;
+            }
+
+            if (!string.IsNullOrEmpty(stack))
+            {
+                using (StringReader sr = new StringReader(stack))
+                {
+                    string line = string.Empty;
+                    while (!string.IsNullOrEmpty(line = sr.ReadLine()))
+                        __WriteLine("|| \t\t" + line);
+                }
+                if (outputThreadId)
+                    __WriteLine("|| \t\t\t" + "At Thread >>>> " + ThreadID);
+            }
         }
+        #endregion
+
+
+        #region OUTPUT
+        public bool CanOutputTxt { get; set; }
+
+        #endregion
     }
 }

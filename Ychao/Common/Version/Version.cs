@@ -12,8 +12,7 @@ namespace Ychao.Common
 
         public Version(int major, int minor, int build, int revision)
         {
-            CodeDebug.Diagnostic(major < 0, ThrowHelper.ArgumentOutOfRangeException("major", ))
-
+            
             _Major = major;
             _Minor = minor;
             _Build = build;

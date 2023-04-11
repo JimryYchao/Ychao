@@ -13,7 +13,7 @@ namespace Ychao.Diagnostics
         static bool IsFirstDebug = true;
 
         /// <summary>
-        /// Debug 重定向
+        /// Debug 版本允许重定向
         /// </summary>
         private static volatile IDebugProvider s_provider = new CodeDebugProvider();
 

@@ -5,9 +5,9 @@ using System.IO;
 using System.Text;
 using Ychao.Diagnostics;
 
-namespace Ychao.Common.Diagnostics.TextWrite
+namespace Ychao.Diagnostics
 {
-    internal class TextWriterCreater
+    internal class TextWriterCreator
     {
         static Dictionary<ITextWriter, StreamWriter> Writers = new Dictionary<ITextWriter, StreamWriter>();
 
@@ -22,16 +22,12 @@ namespace Ychao.Common.Diagnostics.TextWrite
             Writers.Remove(writer);
         }
 
-        internal static void GetWriter(ITextWriter writer)
+        internal static StreamWriter GetWriter(ITextWriter writer)
         {
             //if()
+            return null;
         }
 
-
-#if NETSTANDARD
-        static string DefaultFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Log/";
-#elif NET6_0_OR_GREATER
-#endif 
         static string DefaultFilePath = Environment.CurrentDirectory + "/Log/";
         public static string OutputFilePath { get; set; }
 

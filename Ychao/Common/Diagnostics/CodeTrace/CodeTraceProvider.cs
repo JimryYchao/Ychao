@@ -1,4 +1,4 @@
-﻿namespace Ychao.Common.Diagnostics.CodeTrace
+﻿namespace Ychao.Diagnostics
 {
     internal class CodeTraceProvider
     {

@@ -1,54 +1,55 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 namespace Ychao.Diagnostics
 {
-    internal class CodeDebugProvider : ICodeTraceProvider
+    internal class CodeDebugProvider : ITextWriteProvider
     {
-        public CodeDebugProvider(bool texted)
+        public CodeDebugProvider(bool canWriteToFile)
         {
-            CanWriteToFile = texted;
+            this.CanWriteToFile = canWriteToFile;
         }
 
         public bool CanWriteToFile { get; }
+        public bool AutoFlush { get => Debug.AutoFlush; set => Debug.AutoFlush = value; }
 
-        string GetCategory(MessageCategory category)
+        private string StackTraceDetail(StackTrace? trace)
         {
-            return category switch
-            {
-                MessageCategory.INFO => "INFO",
-                MessageCategory.WARNING => "WARNING",
-                MessageCategory.ERROR => "ERROR",
-                MessageCategory.EXCEPTION => "EXCEPTION",
-
-                _ => "DEBUG",
-            };
-        }
-
-        void PrintStackTraceDetail(StackTrace? trace)
-        {
-            if (trace == null)
-                return;
-            string stack = trace.ToString();
+            string stack = trace?.ToString();
 
             if (!string.IsNullOrEmpty(stack))
             {
+                StringBuilder sb = new StringBuilder("");
                 using (StringReader sr = new StringReader(stack))
                 {
                     string line = string.Empty;
                     while (!string.IsNullOrEmpty(line = sr.ReadLine()))
-                        Debug.WriteLine("\t\t" + line);
+                        sb.AppendLine($"\t\t{line}");
+                    return sb.ToString();
                 }
             }
+            else
+                return string.Empty;
+        }
+
+        protected virtual void WriteCore(string message, MessageCategory category)
+        {
+            Debug.WriteLine(message);
+
+            if (AutoFlush)
+                Debug.Flush();
         }
 
         public void WriteLine(string message, MessageCategory category, StackTrace? trace)
         {
+            var time = DateTime.Now;
             var msg = string.IsNullOrEmpty(message) ? "STACKTRACE" : message;
-            Debug.WriteLine($"[{DateTime.Now}][{Thread.CurrentThread.ManagedThreadId}][{GetCategory(category)}] : {msg}");
-            PrintStackTraceDetail(trace);
+            WriteCore($"[{time}.{time.Millisecond}][{Thread.CurrentThread.ManagedThreadId}][{ITextWriteProvider.GetCategory(category)}] : {msg}" +
+                $"{StackTraceDetail(trace)}",
+                category);
         }
 
         public void Fail(string message, StackTrace? trace)

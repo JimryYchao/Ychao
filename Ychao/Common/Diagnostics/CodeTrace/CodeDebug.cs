@@ -17,9 +17,9 @@ namespace Ychao.Diagnostics
 
     public sealed class CodeDebug
     {
-        internal static volatile ICodeTraceProvider s_provider = new CodeDebugProvider(true);
+        internal static volatile ITextWriteProvider s_provider = new CodeDebugProvider(true);
 
-        public static ICodeTraceProvider SetDebugProvider(ICodeTraceProvider provider)
+        public static ITextWriteProvider SetDebugProvider(ITextWriteProvider provider)
         {
             if (provider == null)
                 throw ThrowHelper.ArgumentNullException(nameof(provider));
@@ -28,31 +28,36 @@ namespace Ychao.Diagnostics
 
         public static void SetDebugFilePath(string path)
         {
-            CodeTraceWritter.OutDirectoryPath = path;
+            CodeTraceWriter.OutDirectoryPath = path;
         }
 
-        public static void BeginWriteToFile() => CodeTraceWritter.BeginWriteThread();
+        /// <summary>
+        /// 是否需要跟踪到输出文件信息
+        /// </summary>
+        public static bool TrackNeedFileInfo { get; set; } 
 
-        public static void StopWriteToFile() => CodeTraceWritter.StopWriteThread();
+        public static void BeginWriteToFile() => CodeTraceWriter.BeginWriteThread();
+
+        public static void StopWriteToFile() => CodeTraceWriter.StopWriteThread();
 
         [Conditional("DEBUG")]
         public static void WriteLineIf(bool condition, string message, MessageCategory category = MessageCategory.DEBUG, bool stackTraceable = false)
         {
             if (condition)
-                CodeTraceWritter.WriteLine(s_provider, message, category, stackTraceable ? new StackTrace(1) : null);
+                CodeTraceWriter.WriteLine(s_provider, message, category, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
         }
 
         [Conditional("DEBUG")]
         public static void WriteLine(string message, MessageCategory category = MessageCategory.DEBUG, bool stackTraceable = false)
         {
-            CodeTraceWritter.WriteLine(s_provider, message, category, stackTraceable ? new StackTrace(1) : null);
+            CodeTraceWriter.WriteLine(s_provider, message, category, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
         }
 
         [Conditional("DEBUG")]
         public static void Assert([DoesNotReturnIf(false)] bool condition, bool stackTraceable = false)
         {
             if (!condition)
-                CodeTraceWritter.Fail(s_provider, string.Empty, stackTraceable ? new StackTrace(1) : null);
+                CodeTraceWriter.Fail(s_provider, string.Empty, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
 
         }
         [Conditional("DEBUG")]
@@ -61,7 +66,7 @@ namespace Ychao.Diagnostics
             if (!condition)
             {
                 onFaild?.Invoke();
-                CodeTraceWritter.Fail(s_provider, string.Empty, stackTraceable ? new StackTrace(1) : null);
+                CodeTraceWriter.Fail(s_provider, string.Empty, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
             }
         }
 
@@ -69,7 +74,7 @@ namespace Ychao.Diagnostics
         public static void Assert([DoesNotReturnIf(false)] bool condition, string message, bool stackTraceable = false)
         {
             if (!condition)
-                CodeTraceWritter.Fail(s_provider, message, stackTraceable ? new StackTrace(1) : null);
+                CodeTraceWriter.Fail(s_provider, message, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
         }
 
         [Conditional("DEBUG")]
@@ -78,7 +83,7 @@ namespace Ychao.Diagnostics
             if (!condition)
             {
                 onFaild?.Invoke();
-                CodeTraceWritter.Fail(s_provider, message, stackTraceable ? new StackTrace(1) : null);
+                CodeTraceWriter.Fail(s_provider, message, stackTraceable ? new StackTrace(1, TrackNeedFileInfo) : null);
             }
         }
     }

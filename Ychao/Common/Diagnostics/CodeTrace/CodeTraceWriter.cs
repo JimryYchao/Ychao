@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Ychao.Diagnostics
 {
-    internal static class CodeTraceWritter
+    internal static class CodeTraceWriter
     {
         private static volatile int s_OnWritting = -1;
         private static volatile int CanDebugToFile = -1;
@@ -17,7 +17,6 @@ namespace Ychao.Diagnostics
         internal static bool OnWritting => s_OnWritting > 0;
         internal static string OutDirectoryPath { get; set; }
 
-
         internal static bool BeginWriteThread()
         {
             return Interlocked.Exchange(ref CanDebugToFile, 1) > 0;
@@ -27,7 +26,7 @@ namespace Ychao.Diagnostics
             return Interlocked.Exchange(ref CanDebugToFile, -1) < 0;
         }
 
-        internal static void WriteLine(ICodeTraceProvider provider, string message, MessageCategory category, StackTrace? trace)
+        internal static void WriteLine(ITextWriteProvider provider, string message, MessageCategory category, StackTrace? trace)
         {
             if (provider == null)
                 return;
@@ -45,7 +44,7 @@ namespace Ychao.Diagnostics
             else
                 provider.WriteLine(message, category, trace);
         }
-        internal static void Fail(ICodeTraceProvider provider, string message, StackTrace? trace)
+        internal static void Fail(ITextWriteProvider provider, string message, StackTrace? trace)
         {
             if (CanDebugToFile > 0 && provider.CanWriteToFile)
             {
@@ -81,12 +80,12 @@ namespace Ychao.Diagnostics
                     Directory.CreateDirectory(defaultOutPath);
             }
 
-            float time = 3000;
+            float time = 1000;
             FileStream fs = null;
             TextWriterTraceListener tracer = null;
             try
             {
-                fs = new FileStream((OutDirectoryPath != null ? OutDirectoryPath : defaultOutPath) + "Debug.txt", FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                fs = new FileStream((OutDirectoryPath != null ? OutDirectoryPath : defaultOutPath) + $"Log_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}.txt", FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
                 Trace.Listeners.Add(tracer = new TextWriterTraceListener(fs));
                 while (true)
                 {
@@ -94,7 +93,7 @@ namespace Ychao.Diagnostics
                     {
                         var ac = s_CodeDebugActions.Dequeue();
                         ac?.Invoke();
-                        time = 3000;
+                        time = 1000;
                         Trace.Flush();
                         continue;
                     }

@@ -34,7 +34,7 @@ namespace Ychao.Diagnostics
         /// <summary>
         /// 是否需要跟踪到输出文件信息
         /// </summary>
-        public static bool TrackNeedFileInfo { get; set; } 
+        public static bool TrackNeedFileInfo { get; set; }
 
         public static void BeginWriteToFile() => CodeTraceWriter.BeginWriteThread();
 

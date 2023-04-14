@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netstandard21;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <RootNamespace>dotnet_learn</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!--<LangVersion>8.0</LangVersion>-->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

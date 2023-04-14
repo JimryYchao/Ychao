@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.Unity", "Ychao.Unity\
 		{E33D8B1C-4843-4AC1-AE33-5CA31819A621} = {E33D8B1C-4843-4AC1-AE33-5CA31819A621}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ychao.Runtime.Dynamic", "Ychao.Runtime.Dynamic\Ychao.Runtime.Dynamic.csproj", "{12F37B44-B3FC-4B14-B438-6315D5A39AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.Runtime.Dynamic", "Ychao.Runtime.Dynamic\Ychao.Runtime.Dynamic.csproj", "{12F37B44-B3FC-4B14-B438-6315D5A39AEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-learn", "dotnet-learn\dotnet-learn.csproj", "{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,10 @@ Global
 		{12F37B44-B3FC-4B14-B438-6315D5A39AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12F37B44-B3FC-4B14-B438-6315D5A39AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12F37B44-B3FC-4B14-B438-6315D5A39AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

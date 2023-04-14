@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using Ychao.Diagnostics;
 
 namespace Ychao.Diagnostics
 {

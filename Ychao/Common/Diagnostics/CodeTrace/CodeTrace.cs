@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
 using System.Threading;
+using Ychao.Diagnostics;
 
 namespace Ychao.Diagnostics
 {

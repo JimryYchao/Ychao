@@ -11,8 +11,8 @@ namespace Ychao.Logs
         private int InstanceId = -1;
         internal ILogHandle BindingsLogger { get; private set; }
         public ILogHandle LogHandler { get; set; }
-        public LogMode LogMode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool LogEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public LogMode LogMode { get; set; }
+        public bool LogEnabled { get; set; }
 
         internal Logger(ILogHandle handler, LogMode mode, bool logEnabled)
         {
@@ -25,7 +25,7 @@ namespace Ychao.Logs
 
         bool CheckGlobalMode(LogMode mode)
         {
-            return (mode & LogManager.GlobalMode) > 0;
+            return (mode & LogSystem.GlobalMode) > 0;
         }
 
         public void Info(object message)
@@ -33,7 +33,7 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Info))
                 return;
             if (LogEnabled && (this.LogMode & LogMode.Info) > 0)
-                LogHandler.Log(LogMode.Info, string.Format(ILogger.InfoFormat, LogManager.TimeStamp, message));
+                LogHandler.Log(LogMode.Info, string.Format(ILogger.INFO, LogSystem.TimeStamp, message));
         }
 
         public void Debug(object message)
@@ -41,7 +41,7 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Debug))
                 return;
             if (LogEnabled && (LogMode & LogMode.Debug) > 0)
-                LogHandler.Log(LogMode.Debug, string.Format(ILogger.DebugFormat, LogManager.TimeStamp, message));
+                LogHandler.Log(LogMode.Debug, string.Format(ILogger.DEBUG, LogSystem.TimeStamp, message));
 
         }
 
@@ -50,7 +50,7 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Warning))
                 return;
             if (LogEnabled && (LogMode & LogMode.Warning) > 0)
-                LogHandler.Log(LogMode.Warning, string.Format(ILogger.WarningFormat, LogManager.TimeStamp, message));
+                LogHandler.Log(LogMode.Warning, string.Format(ILogger.WARNING, LogSystem.TimeStamp, message));
         }
 
         public void Error(object message)
@@ -58,7 +58,7 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Error))
                 return;
             if (LogEnabled && (LogMode & LogMode.Error) > 0)
-                LogHandler.Log(LogMode.Error, string.Format(ILogger.ErrorFormat, LogManager.TimeStamp, message));
+                LogHandler.Log(LogMode.Error, string.Format(ILogger.ERROR, LogSystem.TimeStamp, message));
         }
 
         public void Exception(Exception exception, object message)
@@ -66,7 +66,7 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Exception))
                 return;
             if (LogEnabled && (LogMode & LogMode.Exception) > 0)
-                LogHandler.LogException(LogMode.Exception, exception, string.Format(ILogger.ExceptionFormat, LogManager.TimeStamp, message));
+                LogHandler.LogException(LogMode.Exception, exception, string.Format(ILogger.EXCEPTION, LogSystem.TimeStamp, message));
         }
 
         [DoesNotReturn]
@@ -75,11 +75,11 @@ namespace Ychao.Logs
             if (!CheckGlobalMode(LogMode.Fatal))
                 return;
             if (LogEnabled && (LogMode & LogMode.Fatal) > 0)
-                LogHandler.LogException(LogMode.Fatal, exception, string.Format(ILogger.FatalFormat, LogManager.TimeStamp, message));
+                LogHandler.LogException(LogMode.Fatal, exception, string.Format(ILogger.FATAL, LogSystem.TimeStamp, message));
         }
 
 
-        public void Info(string format, params object[] args)
+        public void InfoFormat(string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Info))
                 return;
@@ -90,7 +90,7 @@ namespace Ychao.Logs
             }
         }
 
-        public void Debug(string format, params object[] args)
+        public void DebugFormat(string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Debug))
                 return;
@@ -101,7 +101,7 @@ namespace Ychao.Logs
             }
         }
 
-        public void Warning(string format, params object[] args)
+        public void WarningFormat(string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Warning))
                 return;
@@ -113,7 +113,7 @@ namespace Ychao.Logs
             }
         }
 
-        public void Error(string format, params object[] args)
+        public void ErrorFormat(string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Error))
                 return;
@@ -124,7 +124,7 @@ namespace Ychao.Logs
             }
         }
 
-        public void Exception(Exception exception, string format, params object[] args)
+        public void ExceptionFormat(Exception exception, string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Exception))
                 return;
@@ -136,7 +136,7 @@ namespace Ychao.Logs
         }
 
         [DoesNotReturn]
-        public void Fatal(Exception exception, string format, params object[] args)
+        public void FatalFormat(Exception exception, string format, params object[] args)
         {
             if (!CheckGlobalMode(LogMode.Fatal))
                 return;

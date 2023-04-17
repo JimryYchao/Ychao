@@ -9,11 +9,10 @@ namespace Ychao.Logs
         public void Log(LogMode logType, object message)
         {
             // 是否需要跳出 控制窗
-            if (GlobalSetting.AllowLogToCmd)
+            if (LogSystem.AllowOutput)
             {
-                //ConsoleHelper.LogToConsole(logType, message);
-
-                ISingleton<LogCollecter>.Singleton.EnLog(message);
+                //LogOutput.
+                //ISingleton<LogCollecter>.Singleton.EnLog(message);
                 return;
             }
             Console.Out.WriteLine(message);

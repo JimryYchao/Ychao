@@ -6,8 +6,8 @@ namespace Ychao
 {
     public static class GlobalSetting
     {
-        public static LogMode GlobalLogMode { get => LogManager.GlobalMode; set => LogManager.GlobalMode = value; }
-        public static bool AllowLogToCmd { get; set; }
+        public static LogMode GlobalLogMode { get => LogSystem.GlobalMode; set => LogSystem.GlobalMode = value; }
+        public static bool AllowOutput { get; set; }
 
 
 

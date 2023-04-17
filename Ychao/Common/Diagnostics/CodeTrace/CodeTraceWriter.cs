@@ -27,7 +27,7 @@ namespace Ychao.Diagnostics
             return Interlocked.Exchange(ref CanDebugToFile, -1) < 0;
         }
 
-        internal static void WriteLine(ITextWriteProvider provider, string message, MessageCategory category, StackTrace? trace)
+        internal static void WriteLine(ITraceWriterProvider provider, string message, MessageCategory category, StackTrace? trace)
         {
             if (provider == null)
                 return;
@@ -45,7 +45,7 @@ namespace Ychao.Diagnostics
             else
                 provider.WriteLine(message, category, trace);
         }
-        internal static void Fail(ITextWriteProvider provider, string message, StackTrace? trace)
+        internal static void Fail(ITraceWriterProvider provider, string message, StackTrace? trace)
         {
             if (CanDebugToFile > 0 && provider.CanWriteToFile)
             {

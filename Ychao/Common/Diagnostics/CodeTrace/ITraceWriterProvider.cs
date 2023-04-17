@@ -2,7 +2,7 @@
 
 namespace Ychao.Diagnostics
 {
-    public interface ITextWriteProvider
+    public interface ITraceWriterProvider
     {
         void WriteLine(string message, MessageCategory category, StackTrace? trace);
         void Fail(string message, StackTrace? trace);
@@ -18,7 +18,6 @@ namespace Ychao.Diagnostics
                 MessageCategory.WARNING => "WARNING",
                 MessageCategory.ERROR => "ERROR",
                 MessageCategory.EXCEPTION => "EXCEPTION",
-
                 _ => "DEBUG",
             };
         }

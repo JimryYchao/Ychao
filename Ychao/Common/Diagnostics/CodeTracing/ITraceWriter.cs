@@ -2,7 +2,7 @@
 
 namespace Ychao.Diagnostics
 {
-    internal interface ITextWriter
+    internal interface ITraceWriter
     {
         StreamWriter StreamWriter { get; }
 

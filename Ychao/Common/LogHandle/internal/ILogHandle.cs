@@ -6,7 +6,4 @@
 
         void LogException(LogMode mode, System.Exception exception, object message);
     }
-
-
-
 }

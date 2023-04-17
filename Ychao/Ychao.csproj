@@ -4,6 +4,7 @@
     <TargetFrameworks>netstandard21;net5.0;net6.0;net7.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>False</SignAssembly>
+    <Nullable>enable</Nullable>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
@@ -41,12 +42,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\AppDomain\Assembly\" />
     <Folder Include="Common\Buffers\" />
     <Folder Include="Common\Classes\" />
     <Folder Include="Common\Configuration\Assemblies\" />
     <Folder Include="Common\Reflection\" />
-    <Folder Include="Common\Text\Format\CustomFormatters\" />
     <Folder Include="Common\Threading\" />
     <Folder Include="Common\IO\" />
     <Folder Include="Common\Serialization\Helpers\NewtonsoftJson\" />

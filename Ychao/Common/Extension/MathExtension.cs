@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ychao
+namespace Ychao.Extension
 {
     public static class MathExtension
 

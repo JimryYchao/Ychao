@@ -9,9 +9,9 @@ namespace Ychao.Diagnostics
 {
     internal class TextWriterCreator
     {
-        static Dictionary<ITextWriter, StreamWriter> Writers = new Dictionary<ITextWriter, StreamWriter>();
+        static Dictionary<ITraceWriter, StreamWriter> Writers = new Dictionary<ITraceWriter, StreamWriter>();
 
-        internal static void Close(ITextWriter writer)
+        internal static void Close(ITraceWriter writer)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace Ychao.Diagnostics
             Writers.Remove(writer);
         }
 
-        internal static StreamWriter GetWriter(ITextWriter writer)
+        internal static StreamWriter GetWriter(ITraceWriter writer)
         {
             //if()
             return null;

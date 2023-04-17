@@ -7,12 +7,12 @@ namespace Ychao.Diagnostics
 {
     internal class CodeTrackListener : TraceListener
     {
-        public override void Write(string message)
+        public override void Write(string information)
         {
 
         }
 
-        public override void WriteLine(string message)
+        public override void WriteLine(string information)
         {
         }
     }

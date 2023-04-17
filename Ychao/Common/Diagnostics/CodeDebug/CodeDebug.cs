@@ -17,9 +17,9 @@ namespace Ychao.Diagnostics
 
     public sealed class CodeDebug
     {
-        internal static volatile ITextWriteProvider s_provider = new CodeDebugProvider(true);
+        internal static volatile ITraceWriterProvider s_provider = new CodeDebugProvider(true);
 
-        public static ITextWriteProvider SetDebugProvider(ITextWriteProvider provider)
+        public static ITraceWriterProvider SetDebugProvider(ITraceWriterProvider provider)
         {
             if (provider == null)
                 throw ThrowHelper.ArgumentNullException(nameof(provider));

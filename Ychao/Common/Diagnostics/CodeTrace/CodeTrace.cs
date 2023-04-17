@@ -7,12 +7,12 @@ namespace Ychao.Diagnostics
 {
     public sealed class CodeTrace
     {
-        internal static volatile ITextWriteProvider s_provider = new CodeTraceProvider(true);
+        internal static volatile ITraceWriterProvider s_provider = new CodeTraceProvider(true);
 
-        public static ITextWriteProvider SetDebugProvider(ITextWriteProvider provider)
+        public static ITraceWriterProvider SetDebugProvider(ITraceWriterProvider provider)
         {
             if (provider == null)
-                throw ThrowHelper.ArgumentNullException(nameof(provider));
+                ThrowHelper.Exception(ExceptionType.ArgumentNullException,nameof(provider));
             return Interlocked.Exchange(ref s_provider, provider);
         }
 

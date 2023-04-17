@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using Ychao.UID;
 
-namespace Ychao
+namespace Ychao.Extension
 {
     public static class SingletonExtension
     {
-        public static T Singleton<T> (this T instance) where T : class, ISingleton<T>
+        public static T Singleton<T>(this T instance) where T : class, ISingleton<T>
         {
-            if(instance == null)
+            if (instance == null)
                 instance = ISingleton<T>.Singleton;
             return instance;
         }

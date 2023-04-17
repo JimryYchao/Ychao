@@ -1,46 +1,9 @@
-﻿using dotnet_learn.SystemDiagnostics.DebugTest;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-namespace dotnet_learn
+namespace Ychao.Diagnostics
 {
-    internal class Program
-    {
-        [DisallowNull]
-        string str = null;
-
-        static void Main(string[] args)
-        {
-            DebugTests dt = new DebugTests();
-            System.Console.WriteLine(dt.Get(" ") ?? "Null");
-
-            pub.Test();
-        }
-
-        [DisallowNull]
-        static int a;
-
-    }
-
-
-    public class pub
-    {
-
-        public static void Test()
-        {
-            System.Console.WriteLine(StackTraceHelper.GetCallStacksInfo(0, true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStacks(0, true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStack(true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStackInfo(false));
-        }
-    }
     public sealed class StackTraceHelper
     {
         public static string GetCallStacksInfo(int skipFrames, bool needFileInfo)
@@ -78,11 +41,9 @@ namespace dotnet_learn
 
                 sb.AppendLine(stackIndent + $"  at Method : {mb.DeclaringType.FullName}.{method}");
 
-
-
                 if (needFileInfo)
-                    sb.AppendLine(stackIndent + $"  in File : [{frame.GetFileName()}] at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
-                stackIndent += "  ";
+                    sb.AppendLine(stackIndent + $"  in File : {frame.GetFileName()} at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
+                stackIndent += "    ";
             }
             return sb.ToString();
         }
@@ -91,7 +52,6 @@ namespace dotnet_learn
         {
             return new StackTrace(skipFrames + 1, needFileInfo);
         }
-
 
         public static string GetCallStackInfo(bool needFileInfo)
         {
@@ -123,11 +83,12 @@ namespace dotnet_learn
 
             sb.AppendLine($"  Called at Method : {mb.DeclaringType.FullName}.{method}");
             if (needFileInfo)
-                sb.AppendLine($"  at File : [{frame.GetFileName()}] at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
+                sb.AppendLine($"  in File : [{frame.GetFileName()}] at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
 
             return sb.ToString();
 
         }
+
         public static StackFrame GetCallStack(bool needFileInfo)
         {
             return new StackFrame(1, needFileInfo);

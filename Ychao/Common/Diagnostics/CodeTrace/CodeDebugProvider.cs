@@ -7,7 +7,7 @@ using Ychao.Diagnostics;
 
 namespace Ychao.Diagnostics
 {
-    internal class CodeDebugProvider : ITextWriteProvider
+    internal class CodeDebugProvider : ITraceWriterProvider
     {
         public CodeDebugProvider(bool canWriteToFile)
         {
@@ -48,7 +48,7 @@ namespace Ychao.Diagnostics
         {
             var time = DateTime.Now;
             var msg = string.IsNullOrEmpty(message) ? "STACKTRACE" : message;
-            WriteCore($"[{time}.{time.Millisecond}][{Thread.CurrentThread.ManagedThreadId}][{ITextWriteProvider.GetCategory(category)}] : {msg}" +
+            WriteCore($"[{time}.{time.Millisecond}][{Thread.CurrentThread.ManagedThreadId}][{ITraceWriterProvider.GetCategory(category)}] : {msg}" +
                 $"{StackTraceDetail(trace)}",
                 category);
         }

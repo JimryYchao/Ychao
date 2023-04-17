@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Ychao.Common.Extension;
 using Ychao.UID;
 
 namespace Ychao.Logs

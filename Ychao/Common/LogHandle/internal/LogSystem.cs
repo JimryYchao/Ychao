@@ -8,11 +8,13 @@ using Ychao.Logs;
 namespace Ychao
 {
     // Global LogManager Instance
-    public sealed class LogManager
+    public sealed class LogSystem
     {
         internal static DateTime TimeStamp => DateTime.Now;
 
-        static LogManager()
+        public static bool AllowOutput { get; set; }
+
+        static LogSystem()
         {
             GlobalMode = LogMode.All;
         }
@@ -38,10 +40,10 @@ namespace Ychao
             public void Debug(object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Debug) > 0)
-                    LogHandler.Log(LogMode.Debug, string.Format(ILogger.DebugFormat, TimeStamp, message));
+                    LogHandler.Log(LogMode.Debug, string.Format(ILogger.DEBUG, TimeStamp, message));
             }
 
-            public void Debug(string format, params object[] args)
+            public void DebugFormat(string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Debug(message);
@@ -50,10 +52,10 @@ namespace Ychao
             public void Error(object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Error) > 0)
-                    LogHandler.Log(LogMode.Error, string.Format(ILogger.ErrorFormat, TimeStamp, message));
+                    LogHandler.Log(LogMode.Error, string.Format(ILogger.ERROR, TimeStamp, message));
             }
 
-            public void Error(string format, params object[] args)
+            public void ErrorFormat(string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Error(message);
@@ -62,10 +64,10 @@ namespace Ychao
             public void Exception(Exception exception, object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Exception) > 0)
-                    LogHandler.LogException(LogMode.Exception, exception, string.Format(ILogger.ExceptionFormat, TimeStamp, message));
+                    LogHandler.LogException(LogMode.Exception, exception, string.Format(ILogger.EXCEPTION, TimeStamp, message));
             }
 
-            public void Exception(Exception exception, string format, params object[] args)
+            public void ExceptionFormat(Exception exception, string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Exception(exception, message);
@@ -76,12 +78,12 @@ namespace Ychao
             public void Fatal(Exception exception, object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Fatal) > 0)
-                    LogHandler.LogException(LogMode.Fatal, exception, string.Format(ILogger.FatalFormat, TimeStamp, message));
+                    LogHandler.LogException(LogMode.Fatal, exception, string.Format(ILogger.FATAL, TimeStamp, message));
                 // 可能有退出的代码
             }
 
             [DoesNotReturn]
-            public void Fatal(Exception exception, string format, params object[] args)
+            public void FatalFormat(Exception exception, string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Fatal(exception, message);
@@ -90,10 +92,10 @@ namespace Ychao
             public void Info(object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Info) > 0)
-                    LogHandler.Log(LogMode.Info, string.Format(ILogger.InfoFormat, TimeStamp, message));
+                    LogHandler.Log(LogMode.Info, string.Format(ILogger.INFO, TimeStamp, message));
             }
 
-            public void Info(string format, params object[] args)
+            public void InfoFormat(string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Info(message);
@@ -102,19 +104,13 @@ namespace Ychao
             public void Warning(object message)
             {
                 if (LogEnabled && (LogMode & LogMode.Warning) > 0)
-                    LogHandler.Log(LogMode.Warning, string.Format(ILogger.WarningFormat, TimeStamp, message));
+                    LogHandler.Log(LogMode.Warning, string.Format(ILogger.WARNING, TimeStamp, message));
             }
 
-            public void Warning(string format, params object[] args)
+            public void WarningFormat(string format, params object[] args)
             {
                 object message = string.Format(format, args);
                 Warning(message);
-            }
-
-            void CheckArrayNull(ref object[] args)
-            {
-                if(args == null)
-                    args = new object[0] { };
             }
         }
     }
@@ -135,3 +131,4 @@ namespace Ychao
         All = Debug | Info | Warning | Error | Exception | Fatal
     }
 }
+

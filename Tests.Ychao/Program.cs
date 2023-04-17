@@ -14,7 +14,7 @@ namespace Ychao.Tests
 
             //Assert.Diagnostic(true);
 
-            Log.Info(" hahah ");
+            Log.InfoFormat(" hahah ");
 
             //Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Debug.AutoFlush = true;

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Ychao.Diagnostics;
 
 namespace Ychao.Common
 {
-    public readonly struct Version : ICloneable, IComparable, IEquatable<Version?>
+    public readonly struct Version : ICloneable, IComparable, IEquatable<Version>
     {
         private readonly int _Major;
         private readonly int _Minor;
@@ -12,7 +13,18 @@ namespace Ychao.Common
 
         public Version(int major, int minor, int build, int revision)
         {
-            
+            if (major < 0)
+                ThrowHelper.ArgumentOutOfRangeException(ExceptionArgument.major);
+
+            if (minor < 0)
+                ThrowHelper.ArgumentOutOfRangeException(nameof(minor), SR.ArgumentOutOfRange_Version);
+
+            if (build < 0)
+                throw new ArgumentOutOfRangeException(nameof(build), SR.ArgumentOutOfRange_Version);
+
+            if (revision < 0)
+                throw new ArgumentOutOfRangeException(nameof(revision), SR.ArgumentOutOfRange_Version);
+
             _Major = major;
             _Minor = minor;
             _Build = build;
@@ -28,8 +40,9 @@ namespace Ychao.Common
         {
         }
 
-        public bool Equals(Version? other)
+        public bool Equals(Version other)
         {
+            throw new NotImplementedException();
         }
     }
 }

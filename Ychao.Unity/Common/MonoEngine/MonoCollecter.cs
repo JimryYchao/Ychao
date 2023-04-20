@@ -16,7 +16,6 @@ namespace Ychao.Unity
         {
             System.Console.WriteLine(1111);
 
-            Mathf
         }
     }
 }

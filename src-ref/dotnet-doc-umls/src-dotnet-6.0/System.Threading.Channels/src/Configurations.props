@@ -1,0 +1,15 @@
+﻿<Project DefaultTargets="Build">
+  <PropertyGroup>
+    <PackageConfigurations>
+      netstandard1.3;
+      netstandard;
+      netcoreapp3.0;
+      net461;
+    </PackageConfigurations>
+    <BuildConfigurations>
+      $(PackageConfigurations);
+      netfx;
+      netcoreapp;
+    </BuildConfigurations>
+  </PropertyGroup>
+</Project>

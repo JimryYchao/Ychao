@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Ychao.Common.Extension;
+using Ychao.Extension;
 using Ychao.UID;
 
 namespace Ychao.Logs
 {
-    internal class LogCollecter : ISingletonInternal<LogCollecter>
+    internal class LogCollecter : SingletonInternal<LogCollecter>
     {
         private LogCollecter()
         {
             this.ReflectionCtorCheck();
-            UID = UIDHelper.GetGlobalUID(this);
         }
 
-        public long UID { get; }
 
         public long Capacity { get; set; }
         public long MaxLogsCount { get; set; }

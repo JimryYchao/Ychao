@@ -31,9 +31,9 @@ namespace Ychao.Text.Format
             else return null;
         }
 
-        protected partial IFormatProvider GetFormatProvider(object )
+        protected IFormatProvider GetFormatProvider(object arg)
         {
-
+            throw new NotImplementedException();
         }
 
 

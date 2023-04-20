@@ -22,7 +22,7 @@ namespace Ychao.Diagnostics
         public static ITraceWriterProvider SetDebugProvider(ITraceWriterProvider provider)
         {
             if (provider == null)
-                throw ThrowHelper.ArgumentNullException(nameof(provider));
+                ThrowHelper.Exception(ExceptionType.ArgumentNullException);
             return Interlocked.Exchange(ref s_provider, provider);
         }
 

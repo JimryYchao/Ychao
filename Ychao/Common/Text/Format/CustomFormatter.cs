@@ -10,26 +10,24 @@ namespace Ychao
     {
         private static volatile CustomFormatInfo? s_inveriantInfo;
 
-        private
-
 
         private static readonly IFormatProvider Instance = new CustomFormatInfo();
 
         public static CustomFormatHelper GetInstance(IFormatProvider formatProvider)
         {
-            CultureInfo cultureInfo = formatProvider as CultureInf ?? Tr!o;
+            //CultureInfo cultureInfo = formatProvider as CultureInf ?? Tr!o;
 
 
 
 
+            throw new NotImplementedException();
 
-
-            Instance.GetFormat(formatProvider)
+            //Instance.GetFormat(formatProvider)
         }
 
         public object? GetFormat(Type? formatType)
         {
-            return
+            throw   new Exception();
         }
 
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
-using Ychao.Common.Diagnostics.ExceptionCapture.Ref;
+using Ychao;
 
 namespace Ychao.Collections
 {
@@ -27,9 +27,7 @@ namespace Ychao.Collections
 
         public DynaEnumeration(int capacity)
         {
-            Assert.Diagnostic(capacity < 0, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.capacity));
-
-            if (capacity == 0)
+            if (capacity <= 0)
                 _items = s_emptyArray;
             else
                 _items = new object[capacity];
@@ -37,7 +35,8 @@ namespace Ychao.Collections
 
         public DynaEnumeration(IEnumerable collection)
         {
-            Assert.Diagnostic(collection == null, ThrowHelper.ArgumentNull(ExceptionArgument.collection));
+            if (collection == null)
+                ThrowHelper.Exception(ExceptionType.ArgumentNullException);
 
 
             if (collection is ICollection c)
@@ -81,7 +80,8 @@ namespace Ychao.Collections
             get => _items.Length;
             set
             {
-                Assert.Diagnostic(value < _size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.value, "Small Capacity"));
+                if (value < _size)
+                    ThrowHelper.Exception("Small Capacity");
 
                 if (value != _items.Length)
                 {
@@ -95,22 +95,24 @@ namespace Ychao.Collections
                     }
                     else _items = s_emptyArray;
                 }
+
             }
         }
-
         public int Count => _size;
 
         public object this[int index]
         {
             get
             {
-                Assert.Diagnostic((uint)index >= (uint)_size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+                if (index >= _size || index < 0)
+                    ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
                 return _items[index];
             }
 
             set
             {
-                Assert.Diagnostic((uint)index >= (uint)_size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+                if (index >= _size || index < 0)
+                    ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
 
                 _items[index] = value;
                 _version++;
@@ -133,7 +135,8 @@ namespace Ychao.Collections
         }
         public void Insert(int index, object item)
         {
-            Assert.Diagnostic((uint)index > (uint)_size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+            if (index >= _size || index < 0)
+                ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
 
             if (_size == _items.Length)
                 EnsureCapacity(_size + 1);
@@ -151,9 +154,9 @@ namespace Ychao.Collections
         }
         public void InsertRange(int index, IEnumerable collection)
         {
-            Assert.Diagnostic(collection == null, ThrowHelper.ArgumentNull(ExceptionArgument.collection));
-
-            Assert.Diagnostic((uint)index > (uint)_size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+            if (collection == null) ThrowHelper.Exception(ExceptionType.ArgumentNullException);
+            if ((uint)index >= (uint)_size)
+                ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
 
             if (collection is ICollection c)
             {
@@ -191,7 +194,8 @@ namespace Ychao.Collections
         }
         public void RemoveAt(int index)
         {
-            Assert.Diagnostic((uint)index >= (uint)_size, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+            if (index >= _size || index < 0)
+                ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
 
             _size--;
             if (index < _size)
@@ -202,11 +206,10 @@ namespace Ychao.Collections
         }
         public void RemoveRange(int index, int count)
         {
-            Assert.Diagnostic(index < 0, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
-
-            Assert.Diagnostic(count < 0, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.count));
-
-            Assert.Diagnostic(_size - index < count, ThrowHelper.Argument(ExceptionArgumentResource.Invalid_Of_Length));
+            if (index < 0 || index >= _size)
+                ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
+            if (count < 0 || _size - index < count)
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             if (count > 0)
             {
@@ -239,11 +242,11 @@ namespace Ychao.Collections
         }
         public void Sort(int index, int count, IComparer comparer)
         {
-            Assert.Diagnostic(index < 0, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.index));
+            if (index < 0 || index >= _size)
+                ThrowHelper.Exception(ExceptionType.IndexOutOfRangeException);
 
-            Assert.Diagnostic(count < 0, ThrowHelper.ArgumentOutOfRange(ExceptionArgument.count));
-
-            Assert.Diagnostic(_size - index < count, ThrowHelper.Argument(ExceptionArgumentResource.Invalid_Of_Length));
+            if (count < 0 || _size - index < count)
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             if (count > 1)
                 Array.Sort(_items, index, count, comparer);

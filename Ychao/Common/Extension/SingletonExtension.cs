@@ -17,7 +17,7 @@ namespace Ychao.Extension
         public static void ReflectionCtorCheck<T>(this T instance) where T : class, ISingleton<T>
         {
             if (instance != null)
-                throw ThrowHelper.InvalidOperation("Reflection is forbidden because a unique singleton already exists.");
+                ThrowHelper.Exception("Reflection is forbidden because a unique singleton already exists.");
         }
     }
 }

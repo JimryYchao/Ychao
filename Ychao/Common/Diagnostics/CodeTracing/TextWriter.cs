@@ -15,7 +15,7 @@ namespace Ychao.Diagnostics
         {
             try
             {
-                writer?.StreamWriter.Close();
+                //writer?.StreamWriter.Close();
             }
             catch { }
 

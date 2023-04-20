@@ -12,8 +12,20 @@ namespace Ychao
         {
             var ex = ExceptionSystem.NewException(exception, category, message);
             ExceptionSystem.Capture(exception, whileException);
-            Log.Exception(ex, ex.Message);
-            throw ex;
+            try
+            {
+                //Log.Exception(ex, ex.Message);
+            }
+            catch
+            {
+                throw ex;// new Exception(/*StackTraceHelper.GetCallStacksInfo(1, true)*/ "  q", ex);
+            }
+        }
+        [DoesNotReturn]
+        public static void Exception(string message)
+        {
+            Exception(ExceptionType.Exception, null, message);
+            Console.WriteLine("do not return ");
         }
 
         [DoesNotReturn]

@@ -32,7 +32,7 @@ namespace Ychao.Diagnostics.Exceptions
 
         internal static Exception NewException(ExceptionType exception, string? category, string? message)
         {
-            var msg = category != null ? $" [{category}] : " : string.Empty + message != null ? message : string.Empty;
+            var msg = !string.IsNullOrEmpty(category) ? $" [{category}] : " : string.Empty + (!string.IsNullOrEmpty(message) ? message : string.Empty);
 
             return exception switch
             {

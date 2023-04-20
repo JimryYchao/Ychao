@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
-using Ychao.Common.Extension;
+using Ychao;
+using Ychao.Extension;
 
 namespace Ychao.UID
 {

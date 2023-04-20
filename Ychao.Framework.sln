@@ -5,11 +5,6 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao", "Ychao\Ychao.csproj", "{E33D8B1C-4843-4AC1-AE33-5CA31819A621}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Ychao", "Tests.Ychao\Tests.Ychao.csproj", "{CFBBB900-D2F2-405A-A1BD-CD0382E19FB4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E33D8B1C-4843-4AC1-AE33-5CA31819A621} = {E33D8B1C-4843-4AC1-AE33-5CA31819A621}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.Network", "Ychao.Net.Tcp\Ychao.Network.csproj", "{5077A358-E7BE-40D0-9C39-A0879EF0F8AA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E33D8B1C-4843-4AC1-AE33-5CA31819A621} = {E33D8B1C-4843-4AC1-AE33-5CA31819A621}
@@ -24,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.Unity", "Ychao.Unity\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.Runtime.Dynamic", "Ychao.Runtime.Dynamic\Ychao.Runtime.Dynamic.csproj", "{12F37B44-B3FC-4B14-B438-6315D5A39AEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-learn", "dotnet-learn\dotnet-learn.csproj", "{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-learn", "dotnet-learn\dotnet-learn.csproj", "{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.OpenAGI", "Ychao.OpenAGI\Ychao.OpenAGI.csproj", "{5408598E-7B3F-4AE5-8104-C2F68F52182F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ychao.CrossLR", "Ychao.CrossLR\Ychao.CrossLR.csproj", "{CEDF1A1D-32E9-4BDD-90AC-17F884BDE32F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +35,6 @@ Global
 		{E33D8B1C-4843-4AC1-AE33-5CA31819A621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33D8B1C-4843-4AC1-AE33-5CA31819A621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33D8B1C-4843-4AC1-AE33-5CA31819A621}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFBBB900-D2F2-405A-A1BD-CD0382E19FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFBBB900-D2F2-405A-A1BD-CD0382E19FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFBBB900-D2F2-405A-A1BD-CD0382E19FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFBBB900-D2F2-405A-A1BD-CD0382E19FB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5077A358-E7BE-40D0-9C39-A0879EF0F8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5077A358-E7BE-40D0-9C39-A0879EF0F8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5077A358-E7BE-40D0-9C39-A0879EF0F8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,6 +55,14 @@ Global
 		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ABDCBA4-C8B8-447F-9423-EB7D6AE58E84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5408598E-7B3F-4AE5-8104-C2F68F52182F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5408598E-7B3F-4AE5-8104-C2F68F52182F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5408598E-7B3F-4AE5-8104-C2F68F52182F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5408598E-7B3F-4AE5-8104-C2F68F52182F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDF1A1D-32E9-4BDD-90AC-17F884BDE32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDF1A1D-32E9-4BDD-90AC-17F884BDE32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDF1A1D-32E9-4BDD-90AC-17F884BDE32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDF1A1D-32E9-4BDD-90AC-17F884BDE32F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

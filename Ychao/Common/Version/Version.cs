@@ -14,16 +14,16 @@ namespace Ychao.Common
         public Version(int major, int minor, int build, int revision)
         {
             if (major < 0)
-                ThrowHelper.ArgumentOutOfRangeException(ExceptionArgument.major);
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             if (minor < 0)
-                ThrowHelper.ArgumentOutOfRangeException(nameof(minor), SR.ArgumentOutOfRange_Version);
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             if (build < 0)
-                throw new ArgumentOutOfRangeException(nameof(build), SR.ArgumentOutOfRange_Version);
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             if (revision < 0)
-                throw new ArgumentOutOfRangeException(nameof(revision), SR.ArgumentOutOfRange_Version);
+                ThrowHelper.Exception(ExceptionType.ArgumentOutOfRangeException);
 
             _Major = major;
             _Minor = minor;
@@ -33,11 +33,12 @@ namespace Ychao.Common
 
         public object Clone()
         {
-
+            throw new NotImplementedException();
         }
 
         public int CompareTo(object obj)
         {
+            throw new Exception();
         }
 
         public bool Equals(Version other)

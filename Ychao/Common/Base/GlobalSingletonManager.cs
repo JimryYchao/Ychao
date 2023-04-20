@@ -13,8 +13,8 @@ namespace Ychao
 
 
         public static bool DestroySingleton<T>() where T: class, ISingleton<T>
-        {   
-
+        {
+            return true;
         }
 
 

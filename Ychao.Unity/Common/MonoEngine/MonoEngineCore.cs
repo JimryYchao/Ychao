@@ -13,14 +13,14 @@ namespace Ychao.Unity
 
         public void Initialize()
         {
-            if ()
-            {
-                DestroyImmediate(this);
-                ThrowHelper.ArgumentOutOfRange(nameof(Singleton));
-            }
+            //if ()
+            //{
+            //    DestroyImmediate(this);
+            //    ThrowHelper.ArgumentOutOfRange(nameof(Singleton));
+            //}
 
-            //Instance = this;
-            DontDestroyOnLoad(Singleton);
+            ////Instance = this;
+            //DontDestroyOnLoad(Singleton);
 
 
 

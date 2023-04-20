@@ -8,6 +8,8 @@ namespace Ychao
     public enum ExceptionType
     {
         Unknown = -1,
+        Exception,
+
         //
         ArgumentException = 1000,
         ArgumentNullException = 1001,

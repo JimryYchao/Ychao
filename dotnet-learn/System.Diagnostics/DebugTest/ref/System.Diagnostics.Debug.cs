@@ -73,6 +73,10 @@ namespace Ref.SystemDiagnostics
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
         public static void WriteLineIf(bool condition, string? message, string? category) { }
     }
+
+    /// <summary>
+    /// 用于与调试器的通讯，建议在发布版中慎用
+    /// </summary>
     public static partial class Debugger
     {
         public static readonly string? DefaultCategory;

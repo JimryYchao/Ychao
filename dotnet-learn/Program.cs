@@ -1,136 +1,52 @@
-﻿using dotnet_learn.SystemDiagnostics.DebugTest;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using dotnet_learn.SystemDiagnostics.Tests;
 using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Reflection;
-using System.Text;
+using Ychao;
 
 namespace dotnet_learn
 {
     internal class Program
     {
-        [DisallowNull]
-        string str = null;
-
         static void Main(string[] args)
         {
-            DebugTests dt = new DebugTests();
-            System.Console.WriteLine(dt.Get(" ") ?? "Null");
-
-            pub.Test();
+            Program p = new Program();
+            //_Debugger.Test();
+            Console.WriteLine(p.FailFastIf(true));
+            p.FailFast();
+            Console.WriteLine("111");
         }
 
-        [DisallowNull]
-        static int a;
-
-    }
-
-
-    public class pub
-    {
-
-        public static void Test()
+        [DoesNotReturn]
+        private void FailFast()
         {
-            System.Console.WriteLine(StackTraceHelper.GetCallStacksInfo(0, true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStacks(0, true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStack(true));
-
-            System.Console.WriteLine(StackTraceHelper.GetCallStackInfo(false));
+            ThrowHelper.Exception("test");
         }
-    }
-    public sealed class StackTraceHelper
-    {
-        public static string GetCallStacksInfo(int skipFrames, bool needFileInfo)
-        {
-            StackTrace st = new StackTrace(skipFrames + 1, needFileInfo);
-            string stackIndent = "";
 
-            StringBuilder sb = new StringBuilder("\n");
-            for (int i = 0; i < st.FrameCount; i++)
+        public void SetState(object? containedField)
+        {
+            containedField = null;
+            if (containedField is null)
             {
-                var frame = st.GetFrame(i);
-                if (frame == null)
-                    continue;
-                MethodBase mb = frame.GetMethod();
-
-                string method = mb.ToString();
-
-                int p = 0;
-                while (p < method.Length)
-                {
-                    if (method[p] == '(')
-                    {
-                        for (int j = p; j > 0; j--)
-                        {
-                            if (method[j] == ' ')
-                            {
-                                method = method.Substring(j + 1);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                    p++;
-                }
-
-                sb.AppendLine(stackIndent + $"  at Method : {mb.DeclaringType.FullName}.{method}");
-
-
-
-                if (needFileInfo)
-                    sb.AppendLine(stackIndent + $"  in File : [{frame.GetFileName()}] at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
-                stackIndent += "  ";
-            }
-            return sb.ToString();
-        }
-
-        public static StackTrace GetCallStacks(int skipFrames, bool needFileInfo)
-        {
-            return new StackTrace(skipFrames + 1, needFileInfo);
-        }
-
-
-        public static string GetCallStackInfo(bool needFileInfo)
-        {
-            StackFrame frame = new StackFrame(1, needFileInfo);
-
-            StringBuilder sb = new StringBuilder("\n");
-
-            MethodBase mb = frame.GetMethod();
-
-            string method = mb.ToString();
-
-            int p = 0;
-            while (p < method.Length)
-            {
-                if (method[p] == '(')
-                {
-                    for (int j = p; j > 0; j--)
-                    {
-                        if (method[j] == ' ')
-                        {
-                            method = method.Substring(j + 1);
-                            break;
-                        }
-                    }
-                    break;
-                }
-                p++;
+                FailFast();
             }
 
-            sb.AppendLine($"  Called at Method : {mb.DeclaringType.FullName}.{method}");
-            if (needFileInfo)
-                sb.AppendLine($"  at File : [{frame.GetFileName()}] at Line({frame.GetFileLineNumber()}:{frame.GetFileColumnNumber()})");
-
-            return sb.ToString();
-
+            // containedField can't be null:
         }
-        public static StackFrame GetCallStack(bool needFileInfo)
+        private int FailFastIf([DoesNotReturnIf(true)] bool isNull)
         {
-            return new StackFrame(1, needFileInfo);
+            if (isNull)
+            {
+                return 11;
+                //throw new InvalidOperationException();
+            }
+            return 1;
+        }
+
+        public void SetFieldState([NotNull] object containedField)
+        {
+            FailFastIf(containedField == null);
+            // No warning: containedField can't be null here:
         }
     }
 }

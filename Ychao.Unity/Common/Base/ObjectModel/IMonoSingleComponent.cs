@@ -9,7 +9,7 @@ namespace Ychao.Unity
         
 
 
-        public static T AddSingleComponent(Transform bindsObj) { })
+        //public static T AddSingleComponent(Transform bindsObj) { })
 
     }
 }

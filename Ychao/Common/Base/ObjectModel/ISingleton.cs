@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks.Sources;
 
 namespace Ychao
 {
@@ -17,11 +16,11 @@ namespace Ychao
                  | BindingFlags.NonPublic);
 
                 if (ctors.Count() != 1)
-                    throw ThrowHelper.InvalidOperationException(String.Format("Type {0} must have exactly one constructor.", typeof(T)));
+                    ThrowHelper.Exception(String.Format("Type {0} must have exactly one constructor.", typeof(T)));
 
                 var ctor = ctors.SingleOrDefault(c => !c.GetParameters().Any() && (c.IsPrivate || c.IsFamily));
                 if (ctor == null)
-                    throw ThrowHelper.InvalidOperationException(String.Format("The constructor for {0} must be private or protected and take no parameters.", typeof(T)));
+                    ThrowHelper.Exception(String.Format("The constructor for {0} must be private or protected and take no parameters.", typeof(T)));
                 m_singleton = (T)ctor.Invoke(null);
             }
             return m_singleton;
@@ -30,7 +29,7 @@ namespace Ychao
         internal static void ReBindSingleton(T instance)
         {
             if (instance == null)
-                throw ThrowHelper.ArgumentNullException(nameof(T));
+                ThrowHelper.Exception(ExceptionType.ArgumentNullException);
 
             ISingleton<T> _pre;
 
@@ -40,11 +39,11 @@ namespace Ychao
                 m_singleton = instance;
             }
             // IDestroy ... IDispose ... 
-            if (_pre is IDispose)
-                Core.Dispose(_pre);
+            //if (_pre is IDispose)
+            //    Core.Dispose(_pre);
 
-            if (_pre is IDestroy)
-                Core.Destroy(_pre);
+            //if (_pre is IDestroy)
+            //    Core.Destroy(_pre);
 
 
         }

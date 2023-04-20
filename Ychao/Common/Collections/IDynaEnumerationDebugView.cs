@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Ychao.Collections
 {
@@ -15,7 +9,7 @@ namespace Ychao.Collections
         public IDynaEnumerationDebugView(IDynaEnumeration<T> enumeration)
         {
             if (enumeration == null)
-                ThrowHelper.ArgumentNull(nameof(enumeration));
+                ThrowHelper.Exception(ExceptionType.ArgumentNullException);
             _enumeration = enumeration;
         }
 

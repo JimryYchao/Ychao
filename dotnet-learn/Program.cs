@@ -3,19 +3,16 @@ using System.Diagnostics.CodeAnalysis;
 using System;
 using System.Reflection;
 using Ychao;
+using System.Text;
+using System.Buffers;
 
 namespace dotnet_learn
 {
     internal class Program
     {
         static void Main(string[] args)
-        {
-            Program p = new Program();
-            //_Debugger.Test();
-            Console.WriteLine(p.FailFastIf(true));
-            p.FailFast();
-            Console.WriteLine("111");
-        }
+        { }
+
 
         [DoesNotReturn]
         private void FailFast()

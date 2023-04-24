@@ -6,9 +6,9 @@ namespace dotnet_learn
     {
         static void Main(string[] args)
         {
-            DebuggerTests.Instance.Test();
+            //DebuggerTests.Instance.Test();
 
-
+            DebugProviderTests.Instance.Test(); 
         }
     }
 }
